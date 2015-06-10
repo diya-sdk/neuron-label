@@ -1,0 +1,30 @@
+<link rel="import" href="../neuron-base/neuron-base.html">
+
+<polymer-element name="neuron-label" attributes="label" extends="neuron-base">
+	<template>
+
+		<style>
+			:host{
+				display: flex;
+			}
+			:host p{
+				margin: 3px;
+			}
+		</style>
+
+		<template repeat="{{value, i in elems}}">
+			<p>{{neuronValues[i]}}</p>
+		</template>
+
+		<shadow></shadow>
+	</template>
+
+	<script>
+		Polymer({
+			ready: function(){
+				this.super();
+			}
+		});
+
+	</script>
+</polymer-element>
