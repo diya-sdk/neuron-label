@@ -1,6 +1,6 @@
 <link rel="import" href="../neuron-base/neuron-base.html">
 
-<polymer-element name="neuron-label" attributes="label" extends="neuron-base">
+<polymer-element name="neuron-label" attributes="label truncate" extends="neuron-base">
 	<template>
 
 		<style>
@@ -13,7 +13,7 @@
 		</style>
 
 		<template repeat="{{value, i in elems}}">
-			<p>{{neuronValues[i]}}</p>
+			<p>{{trunc(neuronValues[i])}}</p>
 		</template>
 
 		<shadow></shadow>
@@ -21,8 +21,17 @@
 
 	<script>
 		Polymer({
+
+			truncate: 3,
+
 			ready: function(){
 				this.super();
+			},
+
+			trunc: function(value){
+				if(value === undefined) return 0;
+				if(this.truncate >= 0) return value.toFixed(this.truncate);
+				return value;
 			}
 		});
 
