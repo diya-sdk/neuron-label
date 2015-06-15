@@ -10,10 +10,15 @@
 			:host p{
 				margin: 3px;
 			}
+
+			:host p[disabled]{
+				background: rgba(255,255,255, 0.5);
+				color: gray;
+			}
 		</style>
 
 		<template repeat="{{value, i in elems}}">
-			<p>{{trunc(neuronValues[i])}}</p>
+			<p disabled="{{state==='disconnected'}}">{{trunc(neuronValues[i])}}</p>
 		</template>
 
 		<shadow></shadow>
