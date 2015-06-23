@@ -1,6 +1,6 @@
 <link rel="import" href="../neuron-base/neuron-base.html">
 
-<polymer-element name="neuron-label" attributes="label truncate" extends="neuron-base">
+<polymer-element name="neuron-label" attributes="label unit truncate" extends="neuron-base">
 	<template>
 
 		<style>
@@ -18,7 +18,7 @@
 		</style>
 
 		<template repeat="{{value, i in elems}}">
-			<p disabled="{{state==='disconnected'}}">{{trunc(neuronValues[i])}}</p>
+			<p disabled="{{state==='disconnected'}}">{{label}} {{trunc(neuronValues[i])}} {{unit}}</p>
 		</template>
 
 		<shadow></shadow>
@@ -28,6 +28,8 @@
 		Polymer({
 
 			truncate: 3,
+			label: '',
+			unit: '',
 
 			ready: function(){
 				this.super();
