@@ -1,6 +1,6 @@
 <link rel="import" href="../neuron-base/neuron-base.html">
 
-<polymer-element name="neuron-label" attributes="label unit truncate" extends="neuron-base">
+<polymer-element name="neuron-label" attributes="label unit truncate factor" extends="neuron-base">
 	<template>
 
 		<style>
@@ -11,14 +11,14 @@
 				margin: 3px;
 			}
 
-			:host p[disabled]{
+			:host p.disconnected{
 				background: rgba(255,255,255, 0.5);
 				color: gray;
 			}
 		</style>
 
 		<template repeat="{{value, i in elems}}">
-			<p disabled="{{state==='disconnected'}}">{{label}} {{trunc(neuronValues[i])}} {{unit}}</p>
+			<p class="{{state}}">{{label}} {{trunc(neuronValues[i])}} {{unit}}</p>
 		</template>
 
 		<shadow></shadow>
@@ -30,6 +30,7 @@
 			truncate: 3,
 			label: '',
 			unit: '',
+			factor: 1,
 
 			ready: function(){
 				this.super();
@@ -37,7 +38,7 @@
 
 			trunc: function(value){
 				if(value === undefined) return 0;
-				if(this.truncate >= 0) return value.toFixed(this.truncate);
+				if(this.truncate >= 0) return (value*this.factor).toFixed(this.truncate);
 				return value;
 			}
 		});
