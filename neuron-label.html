@@ -1,9 +1,8 @@
 <link rel="import" href="../neuron-base/neuron-base.html">
 
-<polymer-element name="neuron-label" attributes="label unit truncate factor" extends="neuron-base">
-	<template>
 
-		<style>
+<dom-module id="neuron-label">
+  <style>
 			:host{
 				display: flex;
 			}
@@ -16,32 +15,37 @@
 				color: gray;
 			}
 		</style>
+  <template>
 
-		<template repeat="{{value, i in elems}}">
-			<p class="{{state}}">{{label}} {{trunc(neuronValues[i])}} {{unit}}</p>
+		<template is="dom-repeat" items="{{elems}}" as="value" index-as="i">
+			<p class="{{state}}"><span>{{label}}</span> <span>{{truncValue(i)}}</span> <span>{{unit}}</span></p>
 		</template>
 
 		<shadow></shadow>
 	</template>
+</dom-module>
+<script>
+	Polymer({
+		is: 'neuron-label',
+		behaviors: [DiyaBehaviors.Neuron],
+		properties: {
+			factor: { type: Number, value: 1, notify: true },
+			label: { type: String, value: '', notify: true },
+			truncate: { type: Number, value: 3, notify: true },
+			unit: { type: String, value: '', notify: true }
+		},
 
-	<script>
-		Polymer({
+		ready: function () {
+		},
 
-			truncate: 3,
-			label: '',
-			unit: '',
-			factor: 1,
+		trunc: function (value) {
+			if (value === undefined) return 0;
+			if (this.truncate >= 0) return (value * this.factor).toFixed(this.truncate);
+			return value;
+		},
 
-			ready: function(){
-				this.super();
-			},
-
-			trunc: function(value){
-				if(value === undefined) return 0;
-				if(this.truncate >= 0) return (value*this.factor).toFixed(this.truncate);
-				return value;
-			}
-		});
-
-	</script>
-</polymer-element>
+		truncValue: function (i) {
+			return this.trunc(this.neuronValues[i]);
+		}
+	});
+</script>
