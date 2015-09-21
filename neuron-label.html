@@ -17,8 +17,8 @@
 		</style>
   <template>
 
-		<template is="dom-repeat" items="{{elems}}" as="value" index-as="i">
-			<p class="{{state}}"><span>{{label}}</span> <span>{{truncValue(i)}}</span> <span>{{unit}}</span></p>
+		<template is="dom-repeat" items="{{neuronValues}}" as="value" index-as="i">
+			<p class$="{{state}}"><span>{{label}}</span> <span>{{trunc(value)}}</span> <span>{{unit}}</span></p>
 		</template>
 
 		<shadow></shadow>
@@ -44,8 +44,5 @@
 			return value;
 		},
 
-		truncValue: function (i) {
-			return this.trunc(this.neuronValues[i]);
-		}
 	});
 </script>
