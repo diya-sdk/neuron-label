@@ -16,6 +16,6 @@
     "tests"
   ],
   "dependencies": {
-    "neuron-base": "partnering/neuron-base"
+    "neuron-base": "partnering/neuron-base#0.5.x"
   }
 }
