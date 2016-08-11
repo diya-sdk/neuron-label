@@ -17,7 +17,7 @@
 		</style>
   <template>
 
-		<template is="dom-repeat" items="{{neuronValues}}" as="value" index-as="i">
+		<template is="dom-repeat" items="{{values}}" as="value" index-as="i">
 			<p class$="{{state}}"><span>{{label}}</span> <span>{{trunc(value)}}</span> <span>{{unit}}</span></p>
 		</template>
 
@@ -32,10 +32,14 @@
 			factor: { type: Number, value: 1, notify: true },
 			label: { type: String, value: '', notify: true },
 			truncate: { type: Number, value: 3, notify: true },
-			unit: { type: String, value: '', notify: true }
+			unit: { type: String, value: '', notify: true },
+			values: { type: Array, value: function() { return []; }, notify: false }
 		},
-
+	
 		ready: function () {
+			this.addEventListener('value', function() {
+				this.values = Array.prototype.slice.call(this.neuronValues);
+			});
 		},
 
 		trunc: function (value) {
@@ -43,6 +47,8 @@
 			if (this.truncate >= 0) return (value * this.factor).toFixed(this.truncate);
 			return value;
 		},
+
+
 
 	});
 </script>
