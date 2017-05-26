@@ -2,7 +2,8 @@
 
 
 <dom-module id="neuron-label">
-  <style>
+	<template>
+		<style>
 			:host{
 				display: flex;
 			}
@@ -15,7 +16,7 @@
 				color: gray;
 			}
 		</style>
-  <template>
+
 
 		<template is="dom-repeat" items="{{values}}" as="value" index-as="i">
 			<p class$="{{state}}"><span>{{label}}</span> <span>{{trunc(value)}}</span> <span>{{unit}}</span></p>
@@ -35,7 +36,7 @@
 			unit: { type: String, value: '', notify: true },
 			values: { type: Array, value: function() { return []; }, notify: false }
 		},
-	
+
 		ready: function () {
 			this.addEventListener('value', function() {
 				this.values = Array.prototype.slice.call(this.neuronValues);
