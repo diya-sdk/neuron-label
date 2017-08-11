@@ -15,9 +15,15 @@
 				background: rgba(255,255,255, 0.5);
 				color: gray;
 			}
+
+			:host p.empty {
+				color: gray;
+			}
 		</style>
 
-
+		<template is="dom-if" if="{{isEmpty(values)}}">
+			<p class="empty">{{label}} N/A</p>
+		</template>
 		<template is="dom-repeat" items="{{values}}" as="value" index-as="i">
 			<p class$="{{state}}"><span>{{label}}</span> <span>{{trunc(value)}}</span> <span>{{unit}}</span></p>
 		</template>
@@ -49,7 +55,8 @@
 			return value;
 		},
 
-
-
+		isEmpty: function (values) {
+			return !Array.isArray (values) ? true : values.length <= 0
+		}
 	});
 </script>
